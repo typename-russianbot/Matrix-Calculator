@@ -1,7 +1,7 @@
 CMakeFiles/np1.dir/src/main.cpp.o: \
  /home/matthewhong/myPrograms/newProject1/src/main.cpp \
  /usr/include/stdc-predef.h \
- /home/matthewhong/myPrograms/newProject1/src/TestMatrix.h \
+ /home/matthewhong/myPrograms/newProject1/src/MatrixCalculator.h \
  /home/matthewhong/myPrograms/newProject1/src/Matrix.h \
  /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
@@ -150,8 +150,6 @@ CMakeFiles/np1.dir/src/main.cpp.o: \
  /usr/include/c++/11/bits/stl_uninitialized.h \
  /usr/include/c++/11/bits/stl_vector.h \
  /usr/include/c++/11/bits/stl_bvector.h \
- /usr/include/c++/11/bits/vector.tcc \
- /home/matthewhong/myPrograms/newProject1/src/MatrixCalculator.h \
- /usr/include/c++/11/chrono /usr/include/c++/11/ratio \
- /usr/include/c++/11/limits /usr/include/c++/11/ctime \
- /usr/include/c++/11/bits/parse_numbers.h
+ /usr/include/c++/11/bits/vector.tcc /usr/include/c++/11/chrono \
+ /usr/include/c++/11/ratio /usr/include/c++/11/limits \
+ /usr/include/c++/11/ctime /usr/include/c++/11/bits/parse_numbers.h

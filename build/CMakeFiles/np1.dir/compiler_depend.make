@@ -3,7 +3,7 @@
 
 CMakeFiles/np1.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/stdc-predef.h \
-  ../src/TestMatrix.h \
+  ../src/MatrixCalculator.h \
   ../src/Matrix.h \
   /usr/include/c++/11/iostream \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
@@ -185,7 +185,6 @@ CMakeFiles/np1.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/c++/11/bits/stl_vector.h \
   /usr/include/c++/11/bits/stl_bvector.h \
   /usr/include/c++/11/bits/vector.tcc \
-  ../src/MatrixCalculator.h \
   /usr/include/c++/11/chrono \
   /usr/include/c++/11/ratio \
   /usr/include/c++/11/limits \
@@ -367,12 +366,6 @@ CMakeFiles/np1.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/c++/11/bits/char_traits.h:
 
-../src/MatrixCalculator.h:
-
-/usr/include/c++/11/bits/allocator.h:
-
-/usr/include/x86_64-linux-gnu/sys/single_threaded.h:
-
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/FILE.h:
@@ -397,17 +390,29 @@ CMakeFiles/np1.dir/src/main.cpp.o: ../src/main.cpp \
 
 ../src/Matrix.h:
 
-../src/TestMatrix.h:
+/usr/include/c++/11/bits/allocator.h:
 
-/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
+/usr/include/x86_64-linux-gnu/sys/single_threaded.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
+../src/MatrixCalculator.h:
 
-/usr/include/c++/11/ios:
+/usr/include/c++/11/type_traits:
+
+/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
+
+/usr/include/c++/11/string:
 
 /usr/include/c++/11/bits/stl_function.h:
 
 /usr/include/stdc-predef.h:
+
+/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
 
@@ -420,6 +425,10 @@ CMakeFiles/np1.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/include/c++/11/bits/memoryfwd.h:
 
 /usr/include/c++/11/bits/stringfwd.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
+
+/usr/include/c++/11/ios:
 
 /usr/include/features-time64.h:
 
@@ -444,18 +453,6 @@ CMakeFiles/np1.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/include/x86_64-linux-gnu/bits/floatn.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
-
-/usr/include/c++/11/type_traits:
-
-/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
-
-/usr/include/c++/11/string:
 
 /usr/include/c++/11/bits/cxxabi_init_exception.h:
 

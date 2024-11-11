@@ -8,115 +8,236 @@
 #pragma once
 
 #include "Matrix.h"
+#include <cstdlib>
 
 using namespace std;
 
 class MatrixCalculator
 {
 private:
-    //* Will have at max two matrices, A and B. As well as a third matrix to store solutions the given matrices.
+    //^ Private Functions:
+
+    //* Add
+    void Addition()
+    {
+        int userM;
+        int userN;
+
+        cout << "|============= Addition =============|" << endl
+             << "Input Dimensions [m x n]: ";
+
+        cin >> userM >> userN;
+
+        cout << endl;
+
+        //* Define Matrix A & B w/ user dimensions
+        Matrix A(userM, userN);
+        Matrix B(userM, userN);
+
+        //* Load Elements onto A:
+        cout << "Input Elements into Matrix A: " << endl;
+        A.input();
+
+        //* Load Elements onto B:
+        cout << "Input Elements into Matrix B: " << endl;
+        B.input();
+
+        cout << endl;
+
+        //* Display A & B
+        cout << "Matrix A: " << endl;
+        A.display();
+        cout << endl;
+
+        cout << "Matrix B: " << endl;
+        B.display();
+        cout << endl;
+
+        //* Add
+        Matrix C = A + B;
+        cout << "[A + B]: " << endl;
+        C.display();
+        cout << endl;
+
+        cout << "|=====================================|" << endl
+             << endl;
+    }
+    
+    //* Subtract
+    void Subtraction()
+    {
+        int userM;
+        int userN;
+
+        cout << "|============ Subtraction ============|" << endl
+             << "Input Dimensions [m x n]: ";
+
+        cin >> userM >> userN;
+
+        cout << endl;
+
+        //* Define Matrix A & B w/ user dimensions
+        Matrix A(userM, userN);
+        Matrix B(userM, userN);
+
+        //* Load Elements onto A:
+        cout << "Input Elements into Matrix A: " << endl;
+        A.input();
+
+        //* Load Elements onto B:
+        cout << "Input Elements into Matrix B: " << endl;
+        B.input();
+
+        cout << endl;
+
+        //* Display A & B
+        cout << "Matrix A: " << endl;
+        A.display();
+        cout << endl;
+
+        cout << "Matrix B: " << endl;
+        B.display();
+        cout << endl;
+
+        //* Add
+        Matrix C = A - B;
+        cout << "[A - B]: " << endl;
+        C.display();
+        cout << endl;
+
+        cout << "|=====================================|" << endl
+             << endl;
+    }
+    
+    //* Multiplication
+    void Multiplication() {}
+    
+    //* Scale
+    void Scale() {}
+
+    //* Determinant
+    void Determinant() {}
+
+    //* Adjugate
+    void Adjugate() {}
+
+    //* Transpose
+    void Transpose() {}
+
+    //* Inverse
+    void Inverse() {}
+
+    //* Rank
+    void Rank() {}
+
+    //* RowReduce
+    void RowReduce() {}
+
 public:
     //^ Construct
     MatrixCalculator() {};
 
     //^ Public Functions:
+
+    //* getInput()
     int getInput()
     {
-        int userInput;
-        //* want to continue looping until a valid input is reached [1 - 9]
+        displayMenu();
+
+        int uInput;
+
         do
         {
-            displayMenu();
             cout << ">> ";
-            cin >> userInput;
-        } while (userInput < 1 || userInput > 11);
+            cin >> uInput;
+        } while (uInput < 1 || uInput > 11);
 
-        return userInput;
+        return uInput;
     }
-
-    //^ Matrix Operations:
 
     //* display()
     void displayMenu()
     {
         cout << "|==========Matrix Calculator==========|" << endl
              << "|Matrix Operations:                   |" << endl
-             << "| 1. Addition                         |" << endl
-             << "| 2. Subtraction                      |" << endl
-             << "| 3. Multiplication                   |" << endl
-             << "| 4. Determinant                      |" << endl
-             << "| 5. Adjugate                         |" << endl
-             << "| 6. Transpose                        |" << endl
+             << "| 1. Add                              |" << endl
+             << "| 2. Subtract                         |" << endl
+             << "| 3. Multiply                         |" << endl
+             << "| 4. Scale                            |" << endl
+             << "| 5. Determinant                      |" << endl
+             << "| 6. Adjugate                         |" << endl
+             << "| 7. Transpose                        |" << endl
              << "| 7. Inverse                          |" << endl
-             << "| 8. Rank                             |" << endl
-             << "| 9. Row Reduce                       |" << endl
-             << "|10. Reset Matrices                   |" << endl
+             << "| 9. Rank                             |" << endl
+             << "|10. Row Reduce                       |" << endl
              << "|11. Exit                             |" << endl
              << "|=====================================|" << endl;
     }
 
-    //* want to read input and run it thru a switch to determine which sub-function we want to go to
+    //* runProgram()
     void runProgram()
     {
+        //* Grab input
         int userInput = getInput();
-        while (userInput != 11)
+        system("clear");
+
+        while (userInput != 10)
         {
             switch (userInput)
             {
             //* Addition
             case 1:
-                cout << "TODO -- addition" << endl;
+                Addition();
                 break;
 
             //* Subtraction
             case 2:
-                cout << "TODO -- subtraction" << endl;
+                Subtraction();
                 break;
 
             //* Multiplication
             case 3:
-                cout << "TODO -- multiplication" << endl;
+                Multiplication();
+                break;
+
+            //* Scale
+            case 4:
+                Scale();
                 break;
 
             //* Determinant
-            case 4:
-                cout << "TODO -- determinant" << endl;
+            case 5:
+                Determinant();
                 break;
 
             //* Adjugate
-            case 5:
-                cout << "TODO -- adjugate" << endl;
+            case 6:
+                Adjugate();
                 break;
 
             //* Transpose
-            case 6:
-                cout << "TODO -- transpose" << endl;
+            case 7:
+                Transpose();
                 break;
 
             //* Inverse
-            case 7:
-                cout << "TODO -- inverse" << endl;
+            case 8:
+                Inverse();
                 break;
 
             //* Rank
-            case 8:
-                cout << "TODO -- rank" << endl;
+            case 9:
+                Rank();
                 break;
 
             //* Row Reduce
-            case 9:
-                cout << "TODO -- row reduce" << endl;
-                break;
-
-            //* Reset Matrix
             case 10:
-                cout << "TODO -- Reset Matrix" << endl;
+                RowReduce();
                 break;
 
             //* Exit Program
             case 11:
                 cout << "User Exited Program" << endl;
-                userInput = 11;
                 return;
             }
 

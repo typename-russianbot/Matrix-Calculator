@@ -142,22 +142,15 @@ public:
     //? inserts user input into current matrix
     void input()
     {
-        //?
-        cout << "Input Matrix Contents Sequentially:" << endl
-             << endl;
-
         for (int i = 0; i < size; i++)
         {
             cout << "Cell[" << i + 1 << "]: ";
             cin >> array[i];
         }
-        system("clear");
-
-        display();
     }
 
     //^ |===Matrix Operations===|
-    
+
     //* det()
     int det()
     {
