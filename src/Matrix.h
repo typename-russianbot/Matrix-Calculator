@@ -19,7 +19,7 @@ private:
     int size;             //* size of array
     int m;                //* rows of array
     int n;                //* cols of array
-    bool isSquare{false}; //*
+    bool isSquare{false}; //* if m == n, isSquare = true
 
 public:
     //^ |===Constructors===|
@@ -54,7 +54,7 @@ public:
         {
             for (int j = 0; j < n; j++)
             {
-                array[i * n + j] = nMatrix[i * n + j];
+                array[i * n + j] = nMatrix[j * n + i];
             }
         }
     }
@@ -102,6 +102,14 @@ public:
     }
 
     //^ |===Public Functions===|
+    void clear()
+    {
+        for (int i = 0; i < size; i++)
+        {
+            array[i] = 0;
+        }
+    }
+
     //* getSize()
     int getSize()
     {
@@ -140,19 +148,20 @@ public:
 
     //* input()
     //? inserts user input into current matrix
-    void input()
+    void insert()
     {
+        cout << "Inserting [" << size << "] Elements: ";
         for (int i = 0; i < size; i++)
         {
-            cout << "Cell[" << i + 1 << "]: ";
+            // cout << "Cell[" << i + 1 << "]: ";
             cin >> array[i];
         }
     }
 
     //^ |===Matrix Operations===|
 
-    //* det()
-    int det()
+    //* determinant() -- in progress
+    int determinant()
     {
         int result;
 
@@ -181,12 +190,79 @@ public:
         return result;
     }
 
-    //* adj()
-    int adj()
+    //* adjugate()
+    int adjugate()
     {
     }
 
-    //* Matrix Addition
+    //* transpose()
+    void transpose()
+    {
+        //* Method for square matrices:
+        if (isSquare == true)
+        {
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (i - j == 0)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        int temp = array[i * n + j];
+                        array[i * n + j] = array[j * n + i];
+                        array[j * n + i] = temp;
+                    }
+                }
+            }
+        }
+
+        //* Method for non-square matrices
+        else
+        {
+            int temp = this->n;
+            this->n = this->m;
+            this->m = temp;
+            this->display(); 
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (i - j == 0)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        int temp = array[i * n + j];
+                        array[i * n + j] = array[j * n + i];
+                        array[j * n + i] = temp;
+                    }
+                }
+            }
+        }
+        cout << "Matrix Transposed" << endl;
+    }
+
+    //* inverse() -- in progress
+    bool inverse()
+    {
+        int det = determinant();
+
+        //! if determinant of matrix = 0, matrix is not invertible
+        if (det == 0)
+        {
+            cout << "Matrix cannot be inverted -- Aborting Process" << endl;
+            return false;
+        }
+
+        cout << "Matrix is invertible" << endl;
+        return true;
+    }
+
+    //* Addition
     Matrix operator+(const Matrix &other) const
     {
         //! Check addition validity
@@ -206,8 +282,7 @@ public:
 
         return result;
     }
-
-    //* Matrix Subtraction
+    //* Subtraction
     Matrix operator-(const Matrix &other) const
     {
         //! Check subtraction validity:
@@ -228,7 +303,7 @@ public:
         return result;
     }
 
-    //* Matrix Scaling [Matrix * int]
+    //* Scaling [Matrix * int]
     Matrix operator*(int scalar) const
     {
         Matrix result(m, n);
@@ -240,7 +315,7 @@ public:
 
         return result;
     }
-    //* Matrix Scaling [int * Matrix]
+    //* Scaling [int * Matrix]
     friend Matrix operator*(int scalar, const Matrix &other)
     {
         return other * scalar;
@@ -249,5 +324,17 @@ public:
     //* Matrix Multiplication
     Matrix operator*(const Matrix &other)
     {
+        Matrix result(m, n);
+        //* Number of columns must match the number of rows...
+
+        if (this->m != other.n || this->n != other.m)
+        {
+            cerr << "Cannot multiply matrices of different dimensions" << endl;
+            return result; //* return zero matrix
+        }
+
+        cout << "multiplication success" << endl;
+
+        return result;
     }
 };

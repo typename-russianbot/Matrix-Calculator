@@ -1,4 +1,4 @@
-# Install script for directory: /home/matthewhong/myPrograms/newProject1
+# Install script for directory: /home/matthewhong/myPrograms/MatrixCalculator
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/matthewhong/myPrograms/newProject1/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/matthewhong/myPrograms/MatrixCalculator/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

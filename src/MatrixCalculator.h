@@ -1,20 +1,25 @@
 /**
- ** |====Class - Menu====|
- **
- **
- **
- **
+ ** |============================MatrixCalculator============================|
+ ** - Currently, all the matrix ops are private.
+ ** - May want to create matrix vars in the class before-hand
+ ** - to save memory & use currently stored matrices, opposed
+ ** - to defining them over and over w/ each function call.
+ ** |========================================================================|
  **/
 #pragma once
 
 #include "Matrix.h"
 #include <cstdlib>
+#include <chrono>
 
 using namespace std;
 
 class MatrixCalculator
 {
 private:
+    //^ Attributes:
+    // Matrix A, B, C, D, E; //* placeholder
+
     //^ Private Functions:
 
     //* Add
@@ -36,11 +41,11 @@ private:
 
         //* Load Elements onto A:
         cout << "Input Elements into Matrix A: " << endl;
-        A.input();
+        A.insert();
 
         //* Load Elements onto B:
         cout << "Input Elements into Matrix B: " << endl;
-        B.input();
+        B.insert();
 
         cout << endl;
 
@@ -62,7 +67,7 @@ private:
         cout << "|=====================================|" << endl
              << endl;
     }
-    
+
     //* Subtract
     void Subtraction()
     {
@@ -82,11 +87,11 @@ private:
 
         //* Load Elements onto A:
         cout << "Input Elements into Matrix A: " << endl;
-        A.input();
+        A.insert();
 
         //* Load Elements onto B:
         cout << "Input Elements into Matrix B: " << endl;
-        B.input();
+        B.insert();
 
         cout << endl;
 
@@ -108,10 +113,10 @@ private:
         cout << "|=====================================|" << endl
              << endl;
     }
-    
+
     //* Multiplication
     void Multiplication() {}
-    
+
     //* Scale
     void Scale() {}
 
@@ -125,7 +130,39 @@ private:
     void Transpose() {}
 
     //* Inverse
-    void Inverse() {}
+    void Inverse()
+    {
+        int userM;
+        int userN;
+
+        cout << "|============ Inverse ============|" << endl
+             << "Input Dimensions [m x n]: ";
+        cin >> userM >> userN;
+        cout << endl;
+
+        Matrix A(userM, userN);
+        Matrix copy(userM, userN);
+
+        //* Load elements onto Matrix:
+        cout << "Input Elements into Matrix: " << endl;
+        A.insert();
+
+        cout << endl;
+
+        cout << "Inputted Matrix: " << endl;
+        A.display();
+        copy = A;
+
+        //* Call Inverse() on copy, we just want to see what the inverse is
+        copy.inverse();
+
+        cout << "Inverted Matrix: " << endl;
+        copy.display();
+        cout << endl;
+
+        cout << "|=====================================|" << endl
+             << endl;
+    }
 
     //* Rank
     void Rank() {}
