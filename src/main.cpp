@@ -13,38 +13,7 @@
 
 int main()
 {
-    //& Test Code
-    // Matrix A{2, 3};
-    // A.insert();
-    // cout << endl << endl;
-
-    // cout << "Matrix A: " << endl;
-    // A.display();
-    // cout << endl;
-
-    // A.transpose();
-
-    // cout << "Matrix A [transposed]: " << endl;
-    // A.display();
-    // cout << endl;
-    // Matrix A{3, 2};
-    // Matrix B{3, 2};
-
-    // Matrix C = A * B;
-
-    // A.clear();
-    // cout << "Cleared Matrix A: " << endl;
-    // A.display();
-
-    // A.input();
-    // A.display();
-    // cout << endl << endl;
-    // A.transpose();
-
-    //& End of test code
-
     MatrixCalculator mc;
     mc.runProgram();
-
     return 0;
 }

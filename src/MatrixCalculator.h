@@ -169,9 +169,10 @@ private:
     //* Add
     void Addition()
     {
+        //! A & B must not be empty
         if (isEmptyA == true || isEmptyB == true)
         {
-            cerr << "ERROR -- A matrix is empty" << endl;
+            cerr << "ERROR -- A Matrix is Empty" << endl;
             return;
         }
 
@@ -195,9 +196,10 @@ private:
     //* Subtract
     void Subtraction()
     {
+        //! A & B must not be empty
         if (isEmptyA == true || isEmptyB == true)
         {
-            cerr << "ERROR -- A matrix is empty" << endl;
+            cerr << "ERROR -- A Matrix is Empty" << endl;
             return;
         }
 
@@ -218,11 +220,65 @@ private:
              << endl;
     }
 
-    //* Multiplication -- add plug-ins
-    void Multiplication() {}
+    //* Multiplication -- in progress
+    void Multiplication()
+    {
+        //! A & B must not be empty
+        if (isEmptyA == true || isEmptyB == true)
+        {
+            cerr << "ERROR -- A Matrix is Empty" << endl;
+            return;
+        }
+
+        // if (A.getM() != B.getN() && A.getM() == B.getM())
+        // {
+        //     cout << "m != n but m == n" << endl; 
+        //     B.transpose(); 
+        // }
+
+        cout << "|=============Matrix Multiplication=============|" << endl;
+        cout << "Matrix A: " << endl;
+        A.display();
+
+        cout << endl;
+
+        cout << "Matrix B: " << endl;
+        B.display();
+
+        Matrix result = A * B;
+
+        cout << "Result: " << endl;
+        result.display();
+        cout << "|===============================================|" << endl
+             << endl;
+    }
 
     //* Scale -- in progress
-    void Scale() {}
+    void Scale()
+    {
+        //! if A & B are both empty:
+        if (isEmptyA == true && isEmptyB == true)
+        {
+            cerr << "ERROR -- Both Matrices are Empty" << endl;
+            return;
+        }
+
+        cout << "|=============Matrix Additon=============|" << endl;
+        cout << "Matrix A: " << endl;
+        A.display();
+
+        cout << endl;
+
+        cout << "Matrix B: " << endl;
+        B.display();
+
+        Matrix result = 3 * A; 
+
+        cout << "Result: " << endl;
+        result.display();
+        cout << "|========================================|" << endl
+             << endl;
+    }
 
     //* Determinant -- add plug-in
     void Determinant() {}
@@ -230,22 +286,42 @@ private:
     //* Adjugate -- in progress
     void Adjugate() {}
 
-    //* Transpose -- Add plug-in
+    //* Transpose
+    //? - transposes either A or B, depending on the truth value of isEmpty
     void Transpose()
     {
-        if (isEmptyA == false)
+        int uInput = 0;
+        do
         {
+            cout << "|=============Matrix Transposition=============|" << endl
+                 << "| 1. Matrix A                                  |" << endl
+                 << "| 2. Matrix B                                  |" << endl
+                 << "| 3. Matrix A & B                              |" << endl
+                 << "|==============================================|" << endl
+                 << " >> ";
+            cin >> uInput;
+
+        } while (uInput < 1 || uInput > 3);
+
+        system("clear");
+
+        switch (uInput)
+        {
+        case 1:
             A.transpose();
-        }
-        if (isEmptyB == false)
-        {
+            break;
+
+        case 2:
             B.transpose();
-        }
-        if (isEmptyA && isEmptyB == true)
-        {
-            cerr << "ERROR -- Both matrices are empty" << endl
-                 << endl;
-            return;
+            break;
+
+        case 3:
+            A.transpose();
+            B.transpose();
+            break;
+
+        default:
+            break;
         }
     }
 
@@ -257,7 +333,7 @@ private:
     //* Rank -- in progress
     void Rank() {}
 
-    //* RowReduce
+    //* RowReduce -- in progress
     void RowReduce() {}
 
 public:

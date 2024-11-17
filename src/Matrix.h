@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
@@ -22,6 +23,7 @@ private:
     bool isSquare{false}; //* if m == n, isSquare = true
 
     //^ |===Private Functions===|
+
     //* setSize()
     void setSize(const int &newSize)
     {
@@ -98,6 +100,16 @@ public:
     {
         return size;
     }
+    //* getM()
+    int getM()
+    {
+        return m;
+    }
+    //* getN()
+    int getN()
+    {
+        return n;
+    }
     //* setMatrix()
     void setMatrix(int m, int n)
     {
@@ -172,10 +184,13 @@ public:
         {
             result = (array[0] * (array[4] * array[8] - array[5] * array[7])) - (array[1] * (array[3] * array[8] - array[5] * array[6])) + (array[2] * (array[3] * array[7] - array[4] * array[6]));
         }
-
         //* if > 3, use diagonal det theorem
 
         return result;
+    }
+    //* cofactor() -- in progress
+    void cofactor()
+    {
     }
     //* adjugate() -- in progress
     int adjugate()
@@ -221,7 +236,6 @@ public:
                 }
             }
 
-            //*
             m = copy.m;
             n = copy.n;
             this->setArray(copy.array);
@@ -253,7 +267,7 @@ public:
         if (m != other.m || n != other.n)
         {
             cerr << "ERROR -- Matrix Overflow/Underflow occurred" << endl;
-            return result; 
+            return result;
         }
 
         //* add a
@@ -304,22 +318,28 @@ public:
     //* Matrix Multiplication
     Matrix operator*(const Matrix &other)
     {
-        Matrix result(m, n);
+        //? NOTE: m, n = row, col
+        int z = 0;
 
-        //* matrices can only be multiplied if m is equal to other m or n
-        if (this->m == other.n)
-        {
-            for (int i = 0; i < m; i++)
-            {
-                for (int j = 0; j < other.n; j++)
-                {
-                }
-            }
-        }
-        else if (this->m != other.n && this->m == other.m)
-        {
-            // cout << "matrices can be multiplied if transposed" << endl;
-        }
+        Matrix result{m, other.n};
+
+        // //* matrices can only be multiplied if m is equal to other m or n
+        // if (this->m == other.n)
+        // {
+        //     cout << "Result.size: " << result.size << endl; 
+        //     while (z < result.size)
+        //     {
+        //         for (int i = 0; i < result.m; i++)
+        //         {
+        //             for (int j = 0; j < result.n; j++)
+        //             {
+        //                 cout << "adding to sum: " <<  array[i * n + j] << " , " << other.array[i * other.n + j] << endl; 
+        //                 result.array[z] += array[i * n + j] * other.array[j * other.n + i];
+        //             }
+        //             z++;
+        //         }
+        //     }
+        // }
 
         return result;
     }
