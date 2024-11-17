@@ -13,171 +13,18 @@
 #include <chrono>
 
 using namespace std;
-
 class MatrixCalculator
 {
 private:
     //^ Attributes:
-    // Matrix A, B, C, D, E; //* placeholder
+    Matrix A;
+    Matrix B;
+    bool isEmptyA;
+    bool isEmptyB;
 
     //^ Private Functions:
-
-    //* Add
-    void Addition()
-    {
-        int userM;
-        int userN;
-
-        cout << "|============= Addition =============|" << endl
-             << "Input Dimensions [m x n]: ";
-
-        cin >> userM >> userN;
-
-        cout << endl;
-
-        //* Define Matrix A & B w/ user dimensions
-        Matrix A(userM, userN);
-        Matrix B(userM, userN);
-
-        //* Load Elements onto A:
-        cout << "Input Elements into Matrix A: " << endl;
-        A.insert();
-
-        //* Load Elements onto B:
-        cout << "Input Elements into Matrix B: " << endl;
-        B.insert();
-
-        cout << endl;
-
-        //* Display A & B
-        cout << "Matrix A: " << endl;
-        A.display();
-        cout << endl;
-
-        cout << "Matrix B: " << endl;
-        B.display();
-        cout << endl;
-
-        //* Add
-        Matrix C = A + B;
-        cout << "[A + B]: " << endl;
-        C.display();
-        cout << endl;
-
-        cout << "|=====================================|" << endl
-             << endl;
-    }
-
-    //* Subtract
-    void Subtraction()
-    {
-        int userM;
-        int userN;
-
-        cout << "|============ Subtraction ============|" << endl
-             << "Input Dimensions [m x n]: ";
-
-        cin >> userM >> userN;
-
-        cout << endl;
-
-        //* Define Matrix A & B w/ user dimensions
-        Matrix A(userM, userN);
-        Matrix B(userM, userN);
-
-        //* Load Elements onto A:
-        cout << "Input Elements into Matrix A: " << endl;
-        A.insert();
-
-        //* Load Elements onto B:
-        cout << "Input Elements into Matrix B: " << endl;
-        B.insert();
-
-        cout << endl;
-
-        //* Display A & B
-        cout << "Matrix A: " << endl;
-        A.display();
-        cout << endl;
-
-        cout << "Matrix B: " << endl;
-        B.display();
-        cout << endl;
-
-        //* Add
-        Matrix C = A - B;
-        cout << "[A - B]: " << endl;
-        C.display();
-        cout << endl;
-
-        cout << "|=====================================|" << endl
-             << endl;
-    }
-
-    //* Multiplication -- add plug-ins
-    void Multiplication() {}
-
-    //* Scale
-    void Scale() {}
-
-    //* Determinant -- add plug-in
-    void Determinant() {}
-
-    //* Adjugate
-    void Adjugate() {}
-
-    //* Transpose -- Add plug-in
-    void Transpose() {}
-
-    //* Inverse
-    void Inverse()
-    {
-        int userM;
-        int userN;
-
-        cout << "|============ Inverse ============|" << endl
-             << "Input Dimensions [m x n]: ";
-        cin >> userM >> userN;
-        cout << endl;
-
-        Matrix A(userM, userN);
-        Matrix copy(userM, userN);
-
-        //* Load elements onto Matrix:
-        cout << "Input Elements into Matrix: " << endl;
-        A.insert();
-
-        cout << endl;
-
-        cout << "Inputted Matrix: " << endl;
-        A.display();
-        copy = A;
-
-        //* Call Inverse() on copy, we just want to see what the inverse is
-        copy.inverse();
-
-        cout << "Inverted Matrix: " << endl;
-        copy.display();
-        cout << endl;
-
-        cout << "|=====================================|" << endl
-             << endl;
-    }
-
-    //* Rank
-    void Rank() {}
-
-    //* RowReduce
-    void RowReduce() {}
-
-public:
-    //^ Construct
-    MatrixCalculator() {};
-
-    //^ Public Functions:
-
-    //* getInput()
-    int getInput()
+    //* getMenuInput()
+    int getMenuInput()
     {
         displayMenu();
 
@@ -185,100 +32,327 @@ public:
 
         do
         {
-            cout << ">> ";
+            cout << " >> ";
             cin >> uInput;
-        } while (uInput < 1 || uInput > 11);
+        } while (uInput < 1 || uInput > 14);
 
         return uInput;
     }
 
-    //* display()
+    //* displayMenu()
     void displayMenu()
     {
         cout << "|==========Matrix Calculator==========|" << endl
              << "|Matrix Operations:                   |" << endl
-             << "| 1. Add                              |" << endl
-             << "| 2. Subtract                         |" << endl
-             << "| 3. Multiply                         |" << endl
-             << "| 4. Scale                            |" << endl
-             << "| 5. Determinant                      |" << endl
-             << "| 6. Adjugate                         |" << endl
-             << "| 7. Transpose                        |" << endl
-             << "| 7. Inverse                          |" << endl
-             << "| 9. Rank                             |" << endl
-             << "|10. Row Reduce                       |" << endl
-             << "|11. Exit                             |" << endl
+             << "| 1. Set Matrices                     |" << endl
+             << "| 2. Reset Matrices                   |" << endl
+             << "| 3. Display Matrices                 |" << endl
+             << "| 4. Add                              |" << endl
+             << "| 5. Subtract                         |" << endl
+             << "| 6. Multiply                         |" << endl
+             << "| 7. Scale                            |" << endl
+             << "| 8. Determinant                      |" << endl
+             << "| 9. Adjugate                         |" << endl
+             << "|10. Transpose                        |" << endl
+             << "|11. Inverse                          |" << endl
+             << "|12. Rank                             |" << endl
+             << "|13. Row Reduce                       |" << endl
+             << "|14. Exit                             |" << endl
              << "|=====================================|" << endl;
     }
+
+    //^ Matrix Operations:
+    //* setMatrices()
+    //? - sets A, B, or both depending on user selection
+    void setMatrices()
+    {
+        int uInput = 0;
+        int m{0}, n{0};
+
+        do
+        {
+            cout << "|==========Matrix Calculator==========|" << endl
+                 << "| 1. Set A                            |" << endl
+                 << "| 2. Set B                            |" << endl
+                 << "| 3. Set A & B                        |" << endl
+                 << "|=====================================|" << endl
+                 << " >> ";
+
+            cin >> uInput;
+        } while (uInput < 1 || uInput > 3);
+
+        system("clear");
+
+        switch (uInput)
+        {
+        case 1: //* Initialize A
+            cout << "|==========Initialize Matrix==========|" << endl;
+            isEmptyA = false;
+
+            cout << "Set Matrix A Dimensions: ";
+            cin >> m >> n;
+            A.setMatrix(m, n);
+
+            A.input();
+
+            cout << "|=====================================|" << endl;
+
+            break;
+
+        case 2: //* Initialize B
+            cout << "|==========Initialize Matrix==========|" << endl;
+            isEmptyB = false;
+
+            cout << "Set Matrix B Dimensions: ";
+            cin >> m >> n;
+            B.setMatrix(m, n);
+
+            B.input();
+            cout << "|=====================================|" << endl;
+            break;
+
+        case 3: //* Initialize A & B
+            cout << "|==========Initialize Matrix==========|" << endl;
+            isEmptyA = isEmptyB = false;
+
+            cout << "Set Matrix A Dimensions: ";
+            cin >> m >> n;
+            A.setMatrix(m, n);
+
+            A.input();
+
+            cout << endl
+                 << endl;
+
+            cout << "Set Matrix B Dimensions: ";
+            cin >> m >> n;
+            B.setMatrix(m, n);
+
+            B.input();
+            cout << "|=====================================|" << endl;
+            break;
+
+        default:
+            break;
+        }
+
+        system("clear");
+    }
+
+    //* clearMatrices()
+    //? - resets all matrices & sets isEmpty to true
+    void clearMatrices()
+    {
+        A.clear();
+        B.clear();
+        isEmptyA = isEmptyB = true;
+    }
+
+    //* displayMatrices()
+    //? - prints all matrices
+    void displayMatrices()
+    {
+        cout << "|=========Outputting Matrices=========|" << endl
+             << " Matrix A:                            " << endl;
+
+        A.display();
+        cout << endl;
+
+        cout << " Matrix B:                            " << endl;
+
+        B.display();
+        cout << endl;
+        cout << "|=====================================|" << endl
+             << endl;
+    }
+
+    //* Add
+    void Addition()
+    {
+        if (isEmptyA == true || isEmptyB == true)
+        {
+            cerr << "ERROR -- A matrix is empty" << endl;
+            return;
+        }
+
+        cout << "|=============Matrix Additon=============|" << endl;
+        cout << "Matrix A: " << endl;
+        A.display();
+
+        cout << endl;
+
+        cout << "Matrix B: " << endl;
+        B.display();
+
+        Matrix result = A + B;
+
+        cout << "Result: " << endl;
+        result.display();
+        cout << "|========================================|" << endl
+             << endl;
+    }
+
+    //* Subtract
+    void Subtraction()
+    {
+        if (isEmptyA == true || isEmptyB == true)
+        {
+            cerr << "ERROR -- A matrix is empty" << endl;
+            return;
+        }
+
+        cout << "|=============Matrix Subtraction=============|" << endl;
+        cout << "Matrix A: " << endl;
+        A.display();
+
+        cout << endl;
+
+        cout << "Matrix B: " << endl;
+        B.display();
+
+        Matrix result = A - B;
+
+        cout << "Result: " << endl;
+        result.display();
+        cout << "|============================================|" << endl
+             << endl;
+    }
+
+    //* Multiplication -- add plug-ins
+    void Multiplication() {}
+
+    //* Scale -- in progress
+    void Scale() {}
+
+    //* Determinant -- add plug-in
+    void Determinant() {}
+
+    //* Adjugate -- in progress
+    void Adjugate() {}
+
+    //* Transpose -- Add plug-in
+    void Transpose()
+    {
+        if (isEmptyA == false)
+        {
+            A.transpose();
+        }
+        if (isEmptyB == false)
+        {
+            B.transpose();
+        }
+        if (isEmptyA && isEmptyB == true)
+        {
+            cerr << "ERROR -- Both matrices are empty" << endl
+                 << endl;
+            return;
+        }
+    }
+
+    //* Inverse -- in progress
+    void Inverse()
+    {
+    }
+
+    //* Rank -- in progress
+    void Rank() {}
+
+    //* RowReduce
+    void RowReduce() {}
+
+public:
+    //^ Construct
+
+    //* default():
+    //? - sets Matrices A/B to 0 & isEmpty to true
+    MatrixCalculator() : A(0), B(0), isEmptyA(true), isEmptyB(true) {};
+
+    //^ Public Functions:
 
     //* runProgram()
     void runProgram()
     {
         //* Grab input
-        int userInput = getInput();
+        int userInput = getMenuInput();
         system("clear");
 
-        while (userInput != 10)
+        while (userInput != 14)
         {
             switch (userInput)
             {
-            //* Addition
+            //* Set Matrices
             case 1:
+                setMatrices();
+                break;
+
+            //* Clear Matrices:
+            case 2:
+                clearMatrices();
+                break;
+
+            //* Display Matrices
+            case 3:
+                displayMatrices();
+                break;
+
+            //* Addition
+            case 4:
                 Addition();
                 break;
 
             //* Subtraction
-            case 2:
+            case 5:
                 Subtraction();
                 break;
 
             //* Multiplication
-            case 3:
+            case 6:
                 Multiplication();
                 break;
 
             //* Scale
-            case 4:
+            case 7:
                 Scale();
                 break;
 
             //* Determinant
-            case 5:
+            case 8:
                 Determinant();
                 break;
 
             //* Adjugate
-            case 6:
+            case 9:
                 Adjugate();
                 break;
 
             //* Transpose
-            case 7:
+            case 10:
                 Transpose();
                 break;
 
             //* Inverse
-            case 8:
+            case 11:
                 Inverse();
                 break;
 
             //* Rank
-            case 9:
+            case 12:
                 Rank();
                 break;
 
             //* Row Reduce
-            case 10:
+            case 13:
                 RowReduce();
                 break;
 
             //* Exit Program
-            case 11:
+            case 14:
                 cout << "User Exited Program" << endl;
                 return;
             }
 
-            userInput = getInput();
+            userInput = getMenuInput();
+            system("clear");
         }
 
         return;

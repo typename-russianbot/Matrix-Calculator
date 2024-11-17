@@ -21,8 +21,26 @@ private:
     int n;                //* cols of array
     bool isSquare{false}; //* if m == n, isSquare = true
 
+    //^ |===Private Functions===|
+    //* setSize()
+    void setSize(const int &newSize)
+    {
+        this->size = newSize;
+    }
+    //* setM()
+    void setM(const int &newM)
+    {
+        this->m = newM;
+    }
+    //* setN()
+    void setN(const int &newN)
+    {
+        this->n = newN;
+    }
+
 public:
     //^ |===Constructors===|
+
     //* Construct 1:
     //? -- takes one integer parameter that sets both n/m to the new size
     Matrix(const int &nSize) : m(nSize), n(nSize)
@@ -40,27 +58,8 @@ public:
             }
         }
     }
-
     //* Construct 2:
-    //? -- takes a single integer & an integer array w/ filled out elements
-    Matrix(const int &nSize, int *nMatrix) : m(nSize), n(nSize)
-    {
-        isSquare = true;                       //* always a square matrix if in this construct
-        array.resize(m * n);                   //* re-size array
-        size = static_cast<int>(array.size()); //* update size
-
-        //* initialize
-        for (int i = 0; i < m; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                array[i * n + j] = nMatrix[j * n + i];
-            }
-        }
-    }
-
-    //* Construct 3:
-    //? -- takes two integer parameters than set n & m to their respective new values
+    //? -takes two integer parameters than set n & m to their respective new values
     Matrix(const int &nRows, const int &nCols) : m(nRows), n(nCols)
     {
         //* is still possible to encounter a square matrix in this constructor
@@ -81,43 +80,34 @@ public:
         }
     }
 
-    //* Construct 4:
-    Matrix(const int &nRows, const int &nCols, int *nMatrix) : m(nRows), n(nCols)
-    {
-        if (m == n)
-        {
-            isSquare = true;
-        }
-
-        array.resize(m * n);                   //* re-size array
-        size = static_cast<int>(array.size()); //* update size
-
-        for (int i = 0; i < m; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                array[i * n + j] = nMatrix[i * n + j];
-            }
-        }
-    }
-
     //^ |===Public Functions===|
+
+    //* clear()
+    //? - resets the matrix & all conditions to 0
     void clear()
     {
-        for (int i = 0; i < size; i++)
-        {
-            array[i] = 0;
-        }
+        array.clear();
+        size = 0;
+        m = 0;
+        n = 0;
+        isSquare = false;
     }
-
     //* getSize()
+    //? - returns the current size of the matrix
     int getSize()
     {
         return size;
     }
-
+    //* setMatrix()
+    void setMatrix(int m, int n)
+    {
+        this->setM(m);
+        this->setN(n);
+        this->setSize(m * n);
+        array.resize(m * n);
+    }
     //* setArray()
-    //? copies the contents of nMatrix into this matrix
+    //? - copies the contents of nMatrix into this matrix
     void setArray(vector<int> &nMatrix)
     {
         for (int i = 0; i < m; i++)
@@ -129,14 +119,15 @@ public:
         }
     }
 
-    //* display()
+    //^ |===Matrix Operations===|
+
+    //* display() -- in progress
     //? displays the current matrix
     void display()
     {
-        //? displays the matrix sequentially in grid format to the console
         for (int i = 0; i < m; i++)
         {
-            cout << "|  ";
+            cout << "\t|  ";
             for (int j = 0; j < n; j++)
             {
                 int element = array[i * n + j];
@@ -145,21 +136,18 @@ public:
             cout << endl;
         }
     }
-
     //* input()
-    //? inserts user input into current matrix
-    void insert()
+    //? - grabs user input & inputs that into the current matrix
+    void input()
     {
+        cout << "Matrix Dimensions: [" << m << ", " << n << "]" << endl;
         cout << "Inserting [" << size << "] Elements: ";
+
         for (int i = 0; i < size; i++)
         {
-            // cout << "Cell[" << i + 1 << "]: ";
             cin >> array[i];
         }
     }
-
-    //^ |===Matrix Operations===|
-
     //* determinant() -- in progress
     int determinant()
     {
@@ -189,13 +177,14 @@ public:
 
         return result;
     }
-
-    //* adjugate()
+    //* adjugate() -- in progress
     int adjugate()
     {
+        return 0;
     }
-
     //* transpose()
+    //? - transposes a given matrix
+    //? - sets every element at a given position [i, j] to [j, i]
     void transpose()
     {
         //* Method for square matrices:
@@ -232,14 +221,14 @@ public:
                 }
             }
 
-            //* 
+            //*
             m = copy.m;
             n = copy.n;
             this->setArray(copy.array);
         }
     }
-
     //* inverse() -- in progress
+    //? - inverses a given matrix
     bool inverse()
     {
         int det = determinant();
@@ -247,25 +236,25 @@ public:
         //! if determinant of matrix = 0, matrix is not invertible
         if (det == 0)
         {
-            cout << "Matrix cannot be inverted -- Aborting Process" << endl;
+            cerr << "ERROR -- Cannot invert matrix" << endl;
             return false;
         }
 
-        cout << "Matrix is invertible" << endl;
         return true;
     }
 
     //* Addition
     Matrix operator+(const Matrix &other) const
     {
+        //* create result matrix:
+        Matrix result(m, n);
+
         //! Check addition validity
         if (m != other.m || n != other.n)
         {
-            throw invalid_argument("Invalid Matrix Dimensions for Addition");
+            cerr << "ERROR -- Matrix Overflow/Underflow occurred" << endl;
+            return result; 
         }
-
-        //* create result matrix:
-        Matrix result(m, n);
 
         //* add a
         for (int i = 0; i < size; i++)
@@ -295,7 +284,6 @@ public:
 
         return result;
     }
-
     //* Scaling [Matrix * int]
     Matrix operator*(int scalar) const
     {
@@ -313,20 +301,25 @@ public:
     {
         return other * scalar;
     }
-
     //* Matrix Multiplication
     Matrix operator*(const Matrix &other)
     {
         Matrix result(m, n);
-        //* Number of columns must match the number of rows...
 
-        if (this->m != other.n || this->n != other.m)
+        //* matrices can only be multiplied if m is equal to other m or n
+        if (this->m == other.n)
         {
-            cerr << "Cannot multiply matrices of different dimensions" << endl;
-            return result; //* return zero matrix
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < other.n; j++)
+                {
+                }
+            }
         }
-
-        cout << "multiplication success" << endl;
+        else if (this->m != other.n && this->m == other.m)
+        {
+            // cout << "matrices can be multiplied if transposed" << endl;
+        }
 
         return result;
     }
