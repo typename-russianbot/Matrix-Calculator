@@ -118,7 +118,7 @@ public:
 
     //* setArray()
     //? copies the contents of nMatrix into this matrix
-    void setArray(int *&nMatrix)
+    void setArray(vector<int> &nMatrix)
     {
         for (int i = 0; i < m; i++)
         {
@@ -222,28 +222,21 @@ public:
         //* Method for non-square matrices
         else
         {
-            int temp = this->n;
-            this->n = this->m;
-            this->m = temp;
-            this->display(); 
+            Matrix copy{n, m};
+
             for (int i = 0; i < m; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
-                    if (i - j == 0)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        int temp = array[i * n + j];
-                        array[i * n + j] = array[j * n + i];
-                        array[j * n + i] = temp;
-                    }
+                    copy.array[j * copy.n + i] = this->array[i * n + j];
                 }
             }
+
+            //* 
+            m = copy.m;
+            n = copy.n;
+            this->setArray(copy.array);
         }
-        cout << "Matrix Transposed" << endl;
     }
 
     //* inverse() -- in progress

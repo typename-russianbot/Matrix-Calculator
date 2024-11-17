@@ -26,7 +26,7 @@ int main()
     // cout << "Matrix A [transposed]: " << endl; 
     // A.display(); 
     // cout << endl; 
-    Matrix A{2, 3}; 
+    Matrix A{3, 2}; 
     A.insert(); 
     A.display(); 
     cout << endl << endl; 

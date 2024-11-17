@@ -114,19 +114,19 @@ private:
              << endl;
     }
 
-    //* Multiplication
+    //* Multiplication -- add plug-ins
     void Multiplication() {}
 
     //* Scale
     void Scale() {}
 
-    //* Determinant
+    //* Determinant -- add plug-in
     void Determinant() {}
 
     //* Adjugate
     void Adjugate() {}
 
-    //* Transpose
+    //* Transpose -- Add plug-in
     void Transpose() {}
 
     //* Inverse
